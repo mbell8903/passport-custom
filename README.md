@@ -53,10 +53,6 @@ application:
         res.redirect('/');
       });
 
-## Examples
-
-For complete, working examples, refer to the multiple [examples](https://github.com/mbell8903/passport-custom/tree/master/examples) included.
-
 ## Tests
 
     $ npm install
