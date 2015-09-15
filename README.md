@@ -24,19 +24,18 @@ unobtrusively integrated into any application or framework that supports
 
 #### Configure Strategy
 
-The custom authentication strategy authenticates users by custom logic.
-The strategy requires a `verify` callback, which is where the custom
-logic goes and calls `done` providing a user.
+The custom authentication strategy authenticates users by custom logic of your choosing.
+The strategy requires a `verify` callback, which is where the custom logic goes and calls
+`done` providing a user. Note that, req is always passed as the first parameter to the 
+`verify` callback.
+
 Here is the pseudo code.
 
-    passport.use('custom', new CustomStrategy(
-      function(done) {
-        User.findOne({ uid: 1 }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          return done(null, user);
-        });
-      }
+    passport.use('strategy-name', new CustomStrategy(
+        function(req, callback) {
+            // build user or set to false based on req object
+            callback(null, user);
+        }
     ));
 
 #### Authenticate Requests
