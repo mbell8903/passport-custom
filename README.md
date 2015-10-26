@@ -33,14 +33,14 @@ Here is the pseudo code.
 
     passport.use('strategy-name', new CustomStrategy(
         function(req, callback) {
-            // build user or set to false based on req object
+            // Do your custom user finding logic here, or set to false based on req object
             callback(null, user);
         }
     ));
 
 #### Authenticate Requests
 
-Use `passport.authenticate()`, specifying the `'custom'` strategy, to
+Use `passport.authenticate()`, specifying the `'custom'` strategy (or whatever you named the strategy upon registration), to
 authenticate requests.
 
 For example, as route middleware in an [Express](http://expressjs.com/)
@@ -65,4 +65,4 @@ application:
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2014 Mike Bell
+Copyright (c) 2014-2015 Mike Bell
