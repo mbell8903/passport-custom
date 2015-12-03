@@ -1,6 +1,6 @@
 {
   "name": "passport-custom",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Custom authentication strategy for Passport.",
   "keywords": [
     "passport",
