@@ -6,7 +6,7 @@ var chai = require('chai'),
 describe('Strategy', function () {
 
 	describe('encountering an error during verification', function () {
-		var strategy = new Strategy(function (done) {
+		var strategy = new Strategy(function (req, done) {
 			done(new Error('something went wrong'));
 		});
 
@@ -31,7 +31,7 @@ describe('Strategy', function () {
 	});
 
 	describe('encountering an exception during verification', function () {
-		var strategy = new Strategy(function (done) {
+		var strategy = new Strategy(function (req, done) {
 			throw new Error('something went horribly wrong');
 		});
 

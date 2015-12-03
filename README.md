@@ -29,14 +29,30 @@ The strategy requires a `verify` callback, which is where the custom logic goes 
 `done` providing a user. Note that, req is always passed as the first parameter to the 
 `verify` callback.
 
-Here is the pseudo code.
+Here is the pseudo code:
 
-    passport.use('strategy-name', new CustomStrategy(
-        function(req, callback) {
-            // Do your custom user finding logic here, or set to false based on req object
-            callback(null, user);
-        }
-    ));
+```
+passport.use('strategy-name', new CustomStrategy(
+  function(req, callback) {
+    // Do your custom user finding logic here, or set to false based on req object
+    callback(null, user);
+  }
+));
+```
+
+And a basic example:
+
+```
+passport.use(new CustomStrategy(
+  function(req, done) {
+    User.findOne({
+      username: req.body.username
+    }, function (err, user) {
+      done(err, user);
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
@@ -46,11 +62,14 @@ authenticate requests.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
-    app.post('/login', 
-      passport.authenticate('custom', { failureRedirect: '/login' }),
-      function(req, res) {
-        res.redirect('/');
-      });
+```
+app.post('/login',
+  passport.authenticate('custom', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
+```
 
 ## Tests
 

@@ -7,7 +7,7 @@ var chai = require('chai'),
 describe('Strategy', function () {
 
 	describe('handling a request with valid credentials in query', function () {
-		var strategy = new Strategy(function (done) {
+		var strategy = new Strategy(function (req, done) {
 			return done(null, { id: '1234' }, { scope: 'read' });
 		});
 
