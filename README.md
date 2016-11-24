@@ -31,7 +31,7 @@ The strategy requires a `verify` callback, which is where the custom logic goes 
 
 Here is the pseudo code:
 
-```
+```javascript
 passport.use('strategy-name', new CustomStrategy(
   function(req, callback) {
     // Do your custom user finding logic here, or set to false based on req object
@@ -42,7 +42,7 @@ passport.use('strategy-name', new CustomStrategy(
 
 And a basic example:
 
-```
+```javascript
 passport.use(new CustomStrategy(
   function(req, done) {
     User.findOne({
@@ -62,7 +62,7 @@ authenticate requests.
 For example, as route middleware in an [Express](http://expressjs.com/)
 application:
 
-```
+```javascript
 app.post('/login',
   passport.authenticate('custom', { failureRedirect: '/login' }),
   function(req, res) {
