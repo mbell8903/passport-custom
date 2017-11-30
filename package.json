@@ -43,5 +43,6 @@
     "example": "examples",
     "test": "test"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "typings": "./lib/index.d.ts"
 }
