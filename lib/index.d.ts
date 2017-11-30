@@ -13,5 +13,4 @@ export declare class Strategy extends PassportStrategy {
     constructor(verify: VerifyCallback);
 }
 
-export default Strategy;
 
