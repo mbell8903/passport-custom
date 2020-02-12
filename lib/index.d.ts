@@ -11,6 +11,7 @@ export interface VerifiedCallback {
 
 export declare class Strategy extends PassportStrategy {
     constructor(verify: VerifyCallback);
+    authenticate(req: Request, options?: any): any;
 }
 
 
