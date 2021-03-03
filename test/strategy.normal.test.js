@@ -37,4 +37,32 @@ describe('Strategy', function () {
 			expect(info.scope).to.equal('read');
 		});
 	});
+
+	describe('calling back with options', function () {
+
+		var optionsPassed;
+
+		var strategy = new Strategy(function (req, options, done) {
+			optionsPassed = options;
+			return done(null, { id: '1234' }, { scope: 'read' });
+		});
+
+		var options = { 'a': 'b' };
+
+		before(function (done) {
+			chai.passport(strategy)
+				.success(function (u, i) {
+					done();
+				})
+				.req(function (req) {
+					req.query = { };
+				})
+				.authenticate(options);
+		});
+
+		it('should pass options', function () {
+			expect(optionsPassed).to.be.an.object;
+			expect(optionsPassed).to.equal(options);
+		});
+	});
 });
