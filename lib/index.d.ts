@@ -6,7 +6,7 @@ export interface VerifyCallback {
 }
 
 export interface VerifiedCallback {
-    (error: any, user?: any, info?: any): void;
+    (error: any, user?: Express.User, info?: any): void;
 }
 
 export declare class Strategy extends PassportStrategy {
