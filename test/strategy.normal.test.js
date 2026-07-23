@@ -15,13 +15,13 @@ describe('Strategy', function () {
 			, info;
 
 		before(function (done) {
-			chai.passport(strategy)
+			chai.passport.use(strategy)
 				.success(function (u, i) {
 					user = u;
 					info = i;
 					done();
 				})
-				.req(function (req) {
+				.request(function (req) {
 					req.query = {};
 				})
 				.authenticate();
@@ -62,11 +62,11 @@ describe('Strategy', function () {
 		var options = { 'a': 'b' };
 
 		before(function (done) {
-			chai.passport(strategy)
+			chai.passport.use(strategy)
 				.success(function (u, i) {
 					done();
 				})
-				.req(function (req) {
+				.request(function (req) {
 					req.query = { };
 				})
 				.authenticate(options);
@@ -92,11 +92,11 @@ describe('Strategy', function () {
 		});
 
 		before(function (done) {
-			chai.passport(strategy)
+			chai.passport.use(strategy)
 				.success(function () {
 					done();
 				})
-				.req(function (req) {
+				.request(function (req) {
 					req.query = {};
 				})
 				.authenticate({ 'a': 'b' });
