@@ -49,6 +49,10 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Enforce code coverage
+        if: matrix.node-version == '24'
+        run: npm run coverage:check
+
   stage:
     needs: test
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'

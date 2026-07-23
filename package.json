@@ -34,7 +34,9 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node --require ./test/bootstrap/node --test test/*.test.js"
+    "test": "node --require ./test/bootstrap/node --test test/*.test.js",
+    "coverage": "node --require ./test/bootstrap/node --experimental-test-coverage --test test/*.test.js",
+    "coverage:check": "node --require ./test/bootstrap/node --experimental-test-coverage --test-coverage-include=lib/*.js --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=90 --test test/*.test.js"
   },
   "homepage": "https://github.com/mbell8903/passport-custom",
   "license": "MIT"
