@@ -1,25 +1,31 @@
-import { Strategy as PassportStrategy } from 'passport-strategy';
-import { Request } from 'express';
+import type { Request } from 'express';
+import passport = require('passport');
 
-export interface VerifyCallback {
-    (req: Request, done: VerifiedCallback): void;
+declare class CustomStrategy implements passport.Strategy {
+    readonly name: 'custom';
+    constructor(verify: CustomStrategy.VerifyCallback);
+    constructor(options: CustomStrategy.StrategyOptions, verify: CustomStrategy.VerifyCallbackWithOptions);
+    authenticate(req: Request, options?: any): void;
 }
 
-export interface VerifyCallbackWithOptions {
-    (req: Request, options: any, done: VerifiedCallback): void;
+declare namespace CustomStrategy {
+    const Strategy: typeof CustomStrategy;
+
+    interface VerifyCallback {
+        (req: Request, done: VerifiedCallback): void;
+    }
+
+    interface VerifyCallbackWithOptions {
+        (req: Request, options: any, done: VerifiedCallback): void;
+    }
+
+    interface VerifiedCallback {
+        (error: any, user?: any, info?: any): void;
+    }
+
+    interface StrategyOptions {
+        passOptionsToCallback: true;
+    }
 }
 
-export interface VerifiedCallback {
-    (error: any, user?: any, info?: any): void;
-}
-
-export interface StrategyOptions {
-    passOptionsToCallback: true;
-}
-
-export declare class Strategy extends PassportStrategy {
-    constructor(verify: VerifyCallback);
-    constructor(options: StrategyOptions, verify: VerifyCallbackWithOptions);
-    authenticate(req: Request, options?: any): any;
-}
-
+export = CustomStrategy;

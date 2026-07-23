@@ -21,20 +21,25 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "CHANGELOG.md"
   ],
   "dependencies": {
+    "@types/express": "^5.0.6",
+    "@types/passport": "^1.0.17",
     "passport-strategy": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.5.0",
-    "chai-passport-strategy": "^3.0.0"
+    "chai-passport-strategy": "^3.0.0",
+    "typescript": "^7.0.2"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "node --require ./test/bootstrap/node --test test/*.test.js",
+    "typecheck": "tsc --project test/types/tsconfig.json",
     "coverage": "node --require ./test/bootstrap/node --experimental-test-coverage --test test/*.test.js",
     "coverage:check": "node --require ./test/bootstrap/node --experimental-test-coverage --test-coverage-include=lib/*.js --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=90 --test test/*.test.js"
   },
