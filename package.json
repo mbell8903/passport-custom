@@ -28,7 +28,7 @@
     "passport-strategy": "1.x.x"
   },
   "devDependencies": {
-    "chai": "^2.1.0",
+    "chai": "^4.5.0",
     "chai-passport-strategy": "0.1.x"
   },
   "engines": {

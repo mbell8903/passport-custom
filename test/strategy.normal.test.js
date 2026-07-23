@@ -28,12 +28,12 @@ describe('Strategy', function () {
 		});
 
 		it('should supply user', function () {
-			expect(user).to.be.an.object;
+			expect(user).to.be.an('object');
 			expect(user.id).to.equal('1234');
 		});
 
 		it('should supply info', function () {
-			expect(info).to.be.an.object;
+			expect(info).to.be.an('object');
 			expect(info.scope).to.equal('read');
 		});
 	});
@@ -73,7 +73,7 @@ describe('Strategy', function () {
 		});
 
 		it('should pass options', function () {
-			expect(optionsPassed).to.be.an.object;
+			expect(optionsPassed).to.be.an('object');
 			expect(optionsPassed).to.equal(options);
 		});
 	});
