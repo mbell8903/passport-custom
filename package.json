@@ -29,18 +29,13 @@
   },
   "devDependencies": {
     "chai": "^2.1.0",
-    "chai-passport-strategy": "0.1.x",
-    "mocha": "^11.7.6"
-  },
-  "overrides": {
-    "diff": "^8.0.3",
-    "serialize-javascript": "^7.0.5"
+    "chai-passport-strategy": "0.1.x"
   },
   "engines": {
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "mocha --reporter spec --require test/bootstrap/node test/*.test.js"
+    "test": "node --require ./test/bootstrap/node --test test/*.test.js"
   },
   "homepage": "https://github.com/mbell8903/passport-custom",
   "directories": {
