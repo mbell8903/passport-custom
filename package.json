@@ -30,7 +30,7 @@
     "passport-strategy": "^1.0.0"
   },
   "devDependencies": {
-    "chai": "^4.5.0",
+    "chai": "^6.2.2",
     "chai-passport-strategy": "^3.0.0",
     "typescript": "^7.0.2"
   },
