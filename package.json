@@ -30,7 +30,11 @@
   "devDependencies": {
     "chai": "^2.1.0",
     "chai-passport-strategy": "0.1.x",
-    "mocha": "^2.1.0"
+    "mocha": "^11.7.6"
+  },
+  "overrides": {
+    "diff": "^8.0.3",
+    "serialize-javascript": "^7.0.5"
   },
   "engines": {
     "node": ">= 0.10.0"
