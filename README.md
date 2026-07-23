@@ -1,50 +1,34 @@
 # passport-custom
 
-[![Build](https://travis-ci.org/mbell8903/passport-custom.png)](https://travis-ci.org/mbell8903/passport-custom)
-[![Coverage Status](https://coveralls.io/repos/mbell8903/passport-custom/badge.png)](https://coveralls.io/r/mbell8903/passport-custom)
-[![Quality](https://codeclimate.com/github/mbell8903/passport-custom.png)](https://codeclimate.com/github/mbell8903/passport-custom)
-[![Dependencies](https://david-dm.org/mbell8903/passport-custom.png)](https://david-dm.org/mbell8903/passport-custom)
+[![Build](https://github.com/mbell8903/passport-custom/actions/workflows/publish.yml/badge.svg)](https://github.com/mbell8903/passport-custom/actions/workflows/publish.yml)
 
-
-[Passport](http://passportjs.org/) strategy for authenticating with custom logic.
+[Passport](https://www.passportjs.org/) strategy for authenticating with custom logic.
 
 This module lets you authenticate using custom logic in your Node.js
-applications. It is based on passport-local module by Jared Hanson.
+applications. It is based on the `passport-local` module by Jared Hanson.
 By plugging into Passport, custom authentication can be easily and
 unobtrusively integrated into any application or framework that supports
-[Connect](http://www.senchalabs.org/connect/)-style middleware, including
-[Express](http://expressjs.com/).
+[Connect](https://github.com/senchalabs/connect)-style middleware, including
+[Express](https://expressjs.com/).
 
 ## Install
 
-    $ npm install passport-custom
+```shell
+npm install passport-custom
+```
 
 ## Usage
 
-#### Configure Strategy
+### Configure a strategy
 
-The custom authentication strategy authenticates users by custom logic of your choosing.
-The strategy requires a `verify` callback, which is where the custom logic goes and calls
-`done` providing a user. Note that, req is always passed as the first parameter to the 
-`verify` callback.
+The strategy requires a `verify` callback containing your authentication logic.
+The request is always passed as the first argument. Call `done` with an error,
+the authenticated user, and optional authentication information.
 
-Here is the pseudo code:
+```js
+const passport = require('passport');
+const CustomStrategy = require('passport-custom').Strategy;
 
-```javascript
-import passportCustom from 'passport-custom';
-const CustomStrategy = passportCustom.Strategy;
-
-passport.use('strategy-name', new CustomStrategy(
-  function(req, callback) {
-    // Do your custom user finding logic here, or set to false based on req object
-    callback(null, user);
-  }
-));
-```
-
-And a basic example:
-
-```javascript
 passport.use(new CustomStrategy(
   function(req, done) {
     User.findOne({
@@ -56,15 +40,28 @@ passport.use(new CustomStrategy(
 ));
 ```
 
-#### Authenticate Requests
+To explicitly pass Passport authentication options to the verify callback, set
+`passOptionsToCallback` when constructing the strategy:
 
-Use `passport.authenticate()`, specifying the `'custom'` strategy (or whatever you named the strategy upon registration), to
-authenticate requests.
+```js
+passport.use(new CustomStrategy(
+  { passOptionsToCallback: true },
+  function(req, options, done) {
+    // Use request-specific authentication options here.
+    done(null, user);
+  }
+));
+```
 
-For example, as route middleware in an [Express](http://expressjs.com/)
+### Authenticate requests
+
+Use `passport.authenticate()` with the `custom` strategy, or the name supplied
+when registering the strategy.
+
+For example, as route middleware in an [Express](https://expressjs.com/)
 application:
 
-```javascript
+```js
 app.post('/login',
   passport.authenticate('custom', { failureRedirect: '/login' }),
   function(req, res) {
@@ -75,15 +72,22 @@ app.post('/login',
 
 ## Tests
 
-    $ npm install
-    $ npm test
+```shell
+npm install
+npm test
+npm run typecheck
+npm run coverage
+```
+
+Continuous integration enforces 100% line and function coverage and 90% branch
+coverage on Node.js 24.
 
 ## Credits
 
-  - [Mike Bell](http://github.com/mbell8903)
+- [Mike Bell](https://github.com/mbell8903)
 
 ## License
 
-[The MIT License](http://opensource.org/licenses/MIT)
+[MIT](LICENSE)
 
-Copyright (c) 2014-2015 Mike Bell
+Copyright (c) 2014-present Mike Bell

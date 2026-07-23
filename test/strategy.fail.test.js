@@ -14,12 +14,12 @@ describe('Strategy', function () {
 		var info;
 
 		before(function (done) {
-			chai.passport(strategy)
+			chai.passport.use(strategy)
 				.fail(function (i) {
 					info = i;
 					done();
 				})
-				.req(function (req) {
+				.request(function (req) {
 					req.body = {};
 				})
 				.authenticate();
@@ -38,12 +38,12 @@ describe('Strategy', function () {
 		var info;
 
 		before(function (done) {
-			chai.passport(strategy)
+			chai.passport.use(strategy)
 				.fail(function (i) {
 					info = i;
 					done();
 				})
-				.req(function (req) {
+				.request(function (req) {
 					req.body = {};
 				})
 				.authenticate();
