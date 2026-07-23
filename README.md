@@ -53,7 +53,18 @@ passport.use(new CustomStrategy(
       done(err, user);
     });
   }
-));
+    ));
+
+To explicitly pass Passport authentication options to the verify callback, set
+`passOptionsToCallback` when constructing the strategy:
+
+    passport.use(new CustomStrategy(
+      { passOptionsToCallback: true },
+      function(req, options, done) {
+        // Use request-specific authentication options here.
+        done(null, user);
+      }
+    ));
 ```
 
 #### Authenticate Requests

@@ -42,10 +42,22 @@ describe('Strategy', function () {
 
 		var optionsPassed;
 
-		var strategy = new Strategy(function (req, options, done) {
+		/*
+		 * Use a zero-arity callback to prove option passing is controlled by
+		 * explicit strategy configuration rather than Function.length.
+		 */
+		var verify = function () {
+			var options = arguments[1],
+				done = arguments[2];
+
 			optionsPassed = options;
 			return done(null, { id: '1234' }, { scope: 'read' });
-		});
+		};
+
+		var strategy = new Strategy(
+			{ passOptionsToCallback: true },
+			verify
+		);
 
 		var options = { 'a': 'b' };
 
@@ -63,6 +75,35 @@ describe('Strategy', function () {
 		it('should pass options', function () {
 			expect(optionsPassed).to.be.an.object;
 			expect(optionsPassed).to.equal(options);
+		});
+	});
+
+	describe('using legacy callback arguments without explicit options', function () {
+
+		var argumentCount;
+
+		/*
+		 * Deliberately declare three parameters. The strategy must not infer
+		 * behavior from Function.length when passOptionsToCallback is unset.
+		 */
+		var strategy = new Strategy(function (req, done, unused) {
+			argumentCount = arguments.length;
+			return done(null, { id: '1234' });
+		});
+
+		before(function (done) {
+			chai.passport(strategy)
+				.success(function () {
+					done();
+				})
+				.req(function (req) {
+					req.query = {};
+				})
+				.authenticate({ 'a': 'b' });
+		});
+
+		it('should use the legacy two-argument callback convention', function () {
+			expect(argumentCount).to.equal(2);
 		});
 	});
 });

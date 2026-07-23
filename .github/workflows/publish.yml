@@ -86,4 +86,5 @@ jobs:
         run: npm pack --dry-run
 
       - name: Stage package on npm
-        run: npm stage publish
+        # Keep the existing stable release on `latest` until 1.2.0 is verified.
+        run: npm stage publish --tag next
