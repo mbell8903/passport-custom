@@ -28,6 +28,7 @@ reviewed before it becomes the default installation.
    npm test
    npm run coverage:check
    npm run typecheck
+   npm run typecheck:pack
    npm pack --dry-run
    ```
 

@@ -76,11 +76,14 @@ app.post('/login',
 npm install
 npm test
 npm run typecheck
+npm run typecheck:pack
 npm run coverage
 ```
 
 Continuous integration enforces 100% line and function coverage and 90% branch
-coverage on Node.js 24.
+coverage on Node.js 24. It also validates the TypeScript declarations from both
+the repository and an isolated packed consumer, and checks the expected npm
+package contents.
 
 ## Credits
 
